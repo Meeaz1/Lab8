@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+int main() {
+    const int MAX_SIZE = 100; 
+    int n;
+    int choice;
+    int is_array_initialized = 0;
+    int min_odd;
+    int a[MAX_SIZE]; 
+
+    do {
+        printf("\nМеню:\n");
+        printf("1. Ввести новий масив\n");
+        printf("2. Знайти мінімальний елемент з непарних індексів\n");
+        printf("3. Вийти\n");
+        printf("Виберіть опцію: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Введіть розмір масиву (не більше %d): ", MAX_SIZE);
+                scanf("%d", &n);
+
+                if (n <= 0 || n > MAX_SIZE || scanf("%d", &n) != 1) {
+                    printf("Неправильний розмір масиву!\n");
+                    continue;
+                }
+
+                printf("Введіть елементи масиву:\n");
+                for (int i = 0; i < n; i++) {
+                    printf("a[%d] = ", i);
+                    scanf("%d", &a[i]);
+                }
+                is_array_initialized = 1;
+                break;
+
+            case 2:
+                if (!is_array_initialized) {
+                    printf("Спочатку введіть масив за допомогою опції 1.\n");
+                } else {
+                    int has_odd = 0;
+                    for (int i = 0; i < n; i += 2) { 
+                        if (a[i] % 2 != 0) {
+                            has_odd = 1;
+                            break;
+                        }
+                    }
+
+                    if (!has_odd) {
+                        printf("В масиві відсутні непарні елементи!\n");
+                        break;
+                    }
+
+                    min_odd = a[0]; 
+                    for (int i = 0; i < n; i += 2) { 
+                        if (a[i] < min_odd) {
+                            min_odd = a[i];
+                        }
+                    }
+                    printf("Мінімальний елемент з непарних індексів: %d\n", min_odd);
+                }
+                break;
+
+            case 3:
+                printf("До побачення!.\n");
+                break;
+
+            default:
+                printf("Неправильний вибір. Спробуйте ще раз.\n");
+                break;
+        }
+    } while (choice != 3);
+
+    return 0;
+}
