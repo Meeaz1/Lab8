@@ -11,8 +11,8 @@ int main() {
 
     do {
         printf("\nМеню:\n");
-        printf("1. Ввести новий масив\n");
-        printf("2. Знайти мінімальний елемент з непарних індексів\n");
+        printf("1. Знайти максимальний елемент масиву\n");
+        printf("2. Ввести новий масив\n");
         printf("3. Вийти\n");
         printf("Виберіть опцію: ");
 
@@ -24,6 +24,22 @@ int main() {
 
         switch (choice) {
             case 1:
+                if (!is_array_initialized) {
+                    printf("Спочатку введіть масив за допомогою опції 2.\n");
+                    break;
+                } else {
+                    int max_index = 0;
+                    for (int i = 1; i < n; i++) { 
+                        if (*(p_a + i) > *(p_a + max_index)) {
+                            max_index = i;
+                        }
+                    }
+
+                    printf("Максимальний елемент масиву: %d\n", *(p_a + max_index));
+                }
+                break;
+
+            case 2:
                 printf("Введіть розмір масиву (не більше %d): ", MAX_SIZE);
                 if (scanf("%d", &n) != 1 || n <= 0 || n > MAX_SIZE) {
                     printf("Неправильний розмір масиву! Будь ласка, введіть додатне ціле число менше або рівне %d.\n", MAX_SIZE);
@@ -41,34 +57,6 @@ int main() {
                     }
                 }
                 is_array_initialized = 1;
-                break;
-
-            case 2:
-                if (!is_array_initialized) {
-                    printf("Спочатку введіть масив за допомогою опції 1.\n");
-                    break;
-                } else {
-                    int has_odd = 0;
-                    for (int i = 1; i < n; i += 2) { 
-                        if (*(p_a + i) % 2 != 0) {
-                            has_odd = 1;
-                            break;
-                        }
-                    }
-
-                    if (!has_odd) {
-                        printf("В масиві відсутні непарні елементи на непарних індексах!\n");
-                        break;
-                    }
-
-                    min_odd = *(p_a + 1); 
-                    for (int i = 3; i < n; i += 2) { 
-                        if (*(p_a + i) < min_odd) {
-                            min_odd = *(p_a + i);
-                        }
-                    }
-                    printf("Мінімальний елемент з непарних індексів: %d\n", min_odd);
-                }
                 break;
 
             case 3:
