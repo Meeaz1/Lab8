@@ -19,6 +19,20 @@ int safeInputInt() {
     }
 }
 
+int generateRandomArray(int *array, int size) {
+    for (int i = 0; i < size; i++) {
+        array[i] = rand() % 201 - 100; 
+    }
+}
+
+int printArray(int *array, int size) {
+    printf("Елементи масиву: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
+}
+
 int main() {
     srand(time(0));
     int n;
@@ -52,11 +66,8 @@ int main() {
                     break;
                 }
 
-                printf("Введіть елементи масиву:\n");
-                for (int i = 0; i < n; i++) {
-                    printf("a[%d] = ", i);
-                    array[i] = safeInputInt();
-                }
+                generateRandomArray(array, n);
+                printArray(array, n);
 
                 int max_index = 0;
                 for (int i = 1; i < n; i++) {
@@ -76,11 +87,8 @@ int main() {
                     break;
                 }
 
-                printf("Введіть елементи масиву:\n");
-                for (int i = 0; i < n; i++) {
-                    printf("a[%d] = ", i);
-                    array[i] = safeInputInt();
-                }
+                generateRandomArray(array, n);
+                printArray(array, n);
 
                 int first_zero_index = -1;
                 int last_zero_index = -1;
@@ -106,7 +114,7 @@ int main() {
                 }
 
                 for (int i = first_zero_index + 1; i < last_zero_index; i++) {
-                    sum += abs(array[i]); // Використання елементів масиву
+                    sum += abs(array[i]);
                 }
 
                 printf("Сума модулів елементів масиву, розташованих між першим і останнім нульовими елементами: %d\n", sum);
